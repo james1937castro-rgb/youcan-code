@@ -1,0 +1,423 @@
+/* -------------------------------------------------
+   🔹 1. إزالة التنسيقات القديمة من أقسام التصنيفات
+-------------------------------------------------- */
+.categories-style-1,
+.categories-style-1 * {
+  border: none !important;
+  background: none !important;
+  box-shadow: none !important;
+}
+
+/* -------------------------------------------------
+   🔹 2. تنسيقات العناوين - موبايل
+-------------------------------------------------- */
+@media (max-width: 768px) {
+  .heading-primary { font-size: 25px !important; }
+  .heading-description { font-size: 17px !important; }
+
+  .categories-list-section .app-heading {
+    background-color: #FB8C3C;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 10px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 30px;
+    text-align: center;
+    border-radius: 1000px 50px 1000px 50px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+  .categories-list-section .heading-primary { color: white; }
+  .categories-list-section .heading-description { color: #0B2545; }
+}
+
+/* -------------------------------------------------
+   🔹 3. إعداد السلايدر والفالـباك
+-------------------------------------------------- */
+.category-slider {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 12px;
+  padding: 10px 0;
+}
+.category-slider.fallback {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+}
+
+/* -------------------------------------------------
+   🔹 4. تنسيقات عنصر التصنيف
+-------------------------------------------------- */
+.categories-style-1 .category-item {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  background: #fff;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+.categories-style-1 .category-item:hover {
+  transform: translateY(-6px) scale(1.04);
+  box-shadow: 0 16px 32px rgba(0,0,0,0.2);
+}
+
+/* -------------------------------------------------
+   🔹 5. صورة التصنيف
+-------------------------------------------------- */
+.categories-style-1 .category-thumbnail img {
+  object-fit: cover;
+  border-radius: 50% !important;
+  border: 1px solid #333 !important;
+  display: block;
+  margin: 10px auto;
+  transition: transform 0.3s ease;
+}
+
+/* -------------------------------------------------
+   🔹 6. تفاصيل التصنيف
+-------------------------------------------------- */
+.categories-style-1 .category-item .category-details {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 4px;
+  padding: 10px 8px !important;
+  margin: 10px auto !important;
+  background-color: rgba(255,255,255,0.9) !important;
+  border-radius: 30px !important;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important;
+  font-family: 'Almarai', sans-serif !important;
+  color: #000 !important;
+  text-align: center !important;
+  line-height: 1.4 !important;
+}
+.categories-style-1 .category-details span {
+  white-space: nowrap;
+}
+.category-details .category-title { color: white; }
+
+/* -------------------------------------------------
+   🔹 7. موبايل - عرض التصنيفات
+-------------------------------------------------- */
+@media (max-width: 768px) {
+  .main-bar { border-radius: 30px; }
+  .categories-list-section .app-heading { margin: -10px 0 10px; }
+  .app-heading { font-size: 14px; padding: 10px; margin: 20px auto; }
+  .category-slider.fallback { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+  .categories-style-1 { display: flex !important; flex-wrap: nowrap; justify-content: space-between; padding: 0 !important; }
+  .categories-style-1 .category-item { flex: 0 0 48%; max-width: 50%; padding: 10px 0 !important; }
+  .categories-style-1 .category-thumbnail img { width: 120px !important; height: auto !important; }
+  .categories-style-1 .category-item .category-details {
+    width: auto;
+    font-size: 13px !important;
+    text-align: center;
+    background-color: #FB8C3C !important;
+  }
+}
+
+/* -------------------------------------------------
+   🔹 8. تنسيقات المنتج - تطبق فقط على Grid و Slider
+-------------------------------------------------- */
+.products-grid .product-item,
+.products-slider .product-item {
+  border-radius: 10px !important;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  position: relative;
+}
+.products-grid .product-details,
+.products-slider .product-details {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.products-grid .product-actions,
+.products-slider .product-actions {
+  margin-top: auto;
+}
+
+/* -------------------------------------------------
+   🔹 9. موبايل - عرض المنتجات
+-------------------------------------------------- */
+@media (max-width: 768px) {
+  .products-slider .product-item .product-actions .button
+ {
+        min-width: 75% !important;
+    }
+  /* grid = منتجين */
+  .products-grid { display: grid; grid-template-columns: repeat(2,1fr); grid-gap: 20px; padding: 0; margin: 0; max-width: 100%; }
+  .products-grid .product-item { max-width: 44vw; }
+  
+  /* slider = منتج واحد */
+  .products-slider .slick-track { display: flex !important; }
+
+  /* تحسينات عامة */
+  .products-grid .product-actions, .products-slider .product-actions { display: flex; justify-content: center; }
+  .products-grid .product-item .product-actions .button,
+  .products-slider .product-item .product-actions .button { min-width: 100%; }
+
+  .slide .mobile-image { border-radius: 26px; padding:1px 7px 5px 7px; }
+  .products-grid .product-details, .products-slider .product-details { padding: 9px 15px !important; }
+  .products-grid .product-details .product-price, .products-slider .product-details .product-price { margin-bottom: -6px; }
+}
+/* -------------------------------------------------
+ product slider -كود تغيير شكل أزرار السلايدر
+-------------------------------------------------- */
+  .slick-next,
+.slick-prev {
+    color: white !important;
+    background-color: #0B2545FF !important;
+    border-color: #f0f0f0 !important;
+}
+/* -------------------------------------------------
+   🔹 10. خصم المنتج
+-------------------------------------------------- */
+.products-grid .product-item .discount_pp,
+.products-slider .product-item .discount_pp {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: white;
+  color: #F97316;
+  padding: 5px 8px;
+  font-size: 14px;
+  border-radius: 4px;
+  font-weight: bold;
+  box-shadow: rgba(0,0,0,0.15) 0px 0px 20px 0px;
+  z-index: 1;
+  animation: pulse 1.5s infinite;
+}
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* -------------------------------------------------
+   🔹 11. عنوان قسم المنتجات
+-------------------------------------------------- */
+.products-list-section .app-heading {
+  background-color: #0B2545FF;
+  width: 100%;
+  padding: 7px;
+  font-size: 11px;
+  border-radius: 5px;
+  margin-bottom: 30px;
+}
+
+/* -------------------------------------------------
+   🔹 12. أزرار الأسهم للسلايدر
+-------------------------------------------------- */
+.categories-wrapper { position: relative; }
+.cat-arrow {
+  position: absolute;
+  top: 42%;
+  transform: translateY(-50%);
+  width: 30px; height: 30px;
+  background-color: white;
+  color: #0B2545;
+  font-weight: bold;
+  border-radius: 50%;
+  border: 1px solid #0B2545 !important;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: flex; align-items: center; justify-content: center;
+}
+.cat-arrow:hover { color: #F97316; transform: translateY(-50%) scale(1.1); }
+.cat-arrow.left { left: -15px; }
+.cat-arrow.right { right: -15px; }
+
+
+
+
+  /* شبكة 4 أعمدة على الحاسوب */
+ul.is-grid.grid-3 {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 20px !important; /* المسافة بين الصناديق */
+  padding: 0;
+  margin: 0;
+}
+
+/* تصميم كل content-box */
+ul.is-grid.grid-3 li.content-box {
+  background-color: #f9f9f9; /* لون الخلفية */
+  padding: 15px;
+  border-radius: 10px; /* زوايا دائرية */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* ظل خفيف */
+  text-align: center;
+}
+
+/* شبكة 2 أعمدة على الهاتف */
+@media (max-width: 768px) {
+  ul.is-grid.grid-3 {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+.footer {
+  border-radius:20px;
+  margin:10px;
+}
+   .footer .footer-body {
+    border-bottom: 0px solid #f0f0f0 !important;
+    border-top: 0px solid #f0f0f0 !important;
+}
+.footer .footer-item h3 {
+    padding: 0 0 0px !important;
+     display: inline-block; /* لكي لا يمتد الخط على كامل العرض */
+    border-bottom: 2px solid #f0f0f0 !important;
+}
+
+.footer .footer-item ul {
+    margin-top: 15px; /* مسافة بين الخط والقائمة */
+}
+
+  @media (max-width: 768px) {
+
+  .single-product .single-title {
+  font-size: clamp(12px, 6vw, 34px); /* حجم خط بين 16px و 24px حسب عرض الشاشة */
+  white-space: nowrap;                /* منع الالتفاف */
+  overflow: hidden;                   /* إخفاء النص الزائد */
+  text-overflow: ellipsis;            /* إظهار نقاط ... لو النص طويل */
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+}
+
+   .single-product .single-title{
+      border: 3px solid #0b3068 ;
+      border-radius: 8px;
+      padding: 10px 15px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      background-color: #fff;
+   }
+
+.single-product .preview {
+    
+    border-radius: 20px 20px 20px 20px !important;
+   box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+.thumbnail-preview img {
+    border: 2px solid #0b3068!important;
+    border-radius: 10px 10px 10px 10px !important;
+}
+.single-product .thumbnails .thumbnail-item {
+  border:none !important;
+}
+.checkout-form .chekout-heading {
+  
+}
+
+
+
+  .checkout-form {
+  margin-top:10px;
+  border: 2px solid #0b3068; /* لون أزرق */
+  border-radius: 10px; /* زوايا مستديرة */
+  padding: 20px; /* مسافة داخلية حتى ما يلتصق المحتوى بالحد */
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2); /* ظل خفيف أزرق */
+  
+}
+.checkout-form {
+  border: 3px solid #0b3068; /* الإطار */
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center; /* يوسّط النصوص داخله */
+}
+
+.checkout-heading {
+  display: inline-block;
+  margin: 0 auto 20px; /* مسافة أسفل العنوان */
+  padding: 5px 15px;
+  background: white;
+  font-size: 20px;
+  color: #007bff;
+  font-weight: bold;
+  border-radius: 8px;
+}
+.checkout-section .checkout input[type=text]{
+  border:1px dashed #0B2545FF ;
+  border-radius:20px !important;
+}
+
+
+  /* -------------------------------------------------
+   🔹 تعديل حجم صورة التصنيف على الحاسوب
+-------------------------------------------------- */
+@media (min-width: 1025px) {
+  /* حجم الصورة */   
+   .main-bar { border-radius: 60px; margin:2px 0px; }
+   .categories-style-1 .category-thumbnail img {
+    width: 210px;   /* يمكن تعديل هذا الرقم */
+    height: 210px;  /* يمكن تعديل هذا الرقم */
+  }
+.categories-style-1 .category-item .category-details
+ {
+    background-color: #FB8C3C !important;
+    width: 75% ;
+    
+}
+.categories-list-section .app-heading {
+    background-color: #FB8C3C ;
+    width: 100%;
+    max-width: 400px ;
+    margin: 0 auto ;
+    padding: 10px 15px;
+    font-size: 14px ;
+    font-weight: bold ;
+    color: #fff ;
+    margin-bottom: 30px ;
+    text-align: center ;
+    border-radius: 1000px 50px 1000px 50px ;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2) ;
+}
+
+.categories-list-section .heading-primary {
+    color: white !important;
+}
+
+.categories-list-section .heading-description {
+    color: #0B2545 !important;
+}
+.cat-arrow {
+  top:45%;
+}
+.products-list-section {
+  text-align: center !important; /* يوسّط كل العناصر داخله */
+}
+
+.products-list-section .app-heading {
+  display: inline-block !important;
+  margin-bottom:57px;
+    padding: 10px 15px;
+    font-size: 14px ;
+    font-weight: bold ;
+    color: #fff ;
+    text-align: center ;
+    border-radius: 1000px 50px 1000px 50px ;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2) ;
+   width: 40%;/* ليأخذ حجمه الطبيعي ويسمح بالتوسيط */
+}
+.single-product .product-details .product-section {
+   text-align: center;
+}
+  .single-product .product-details .product-section .single-title {
+   display: block;
+  text-align: center;
+  
+  }
+
+}
