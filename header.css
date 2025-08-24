@@ -36,14 +36,6 @@
     100% { transform: scale(1); }
   }
 
-    .menu-sidebar * {
-      color: #000 !important; /* يجعل النص أسود */
-    }
-  
-    .menu-sidebar {
-      background-color: #ffffff !important; /* يجعل الخلفية بيضاء */
-      z-index: 9999 !important; /* يظهرها فوق كل شيء */
-    }
 
     /* استهداف صورة السلايدر الخاصة بالهاتف */
   img.mobile-image {
