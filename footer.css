@@ -25,7 +25,10 @@
     margin-bottom: 30px;
     text-align: center;
     border-radius: 1000px 50px 1000px 50px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
   }
+  .categories-list-section .heading-primary { color: white; }
+  .categories-list-section .heading-description { color: #0B2545; }
 }
 
 /* -------------------------------------------------
@@ -52,10 +55,12 @@
   scroll-snap-align: start;
   text-align: center;
   border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   transition: all 0.3s ease;
 }
 .categories-style-1 .category-item:hover {
   transform: translateY(-6px) scale(1.04);
+  box-shadow: 0 16px 32px rgba(0,0,0,0.2);
 }
 
 /* -------------------------------------------------
@@ -85,7 +90,10 @@
   text-align: center !important;
   line-height: 1.4 !important;
 }
-.categories-style-1 .category-details span { white-space: nowrap; }
+.categories-style-1 .category-details span {
+  white-space: nowrap;
+}
+.category-details .category-title { color: white; }
 
 /* -------------------------------------------------
    🔹 7. موبايل - عرض التصنيفات
@@ -106,7 +114,7 @@
 }
 
 /* -------------------------------------------------
-   🔹 8. تنسيقات المنتج
+   🔹 8. تنسيقات المنتج - تطبق فقط على Grid و Slider
 -------------------------------------------------- */
 .products-grid .product-item,
 .products-slider .product-item {
@@ -133,16 +141,60 @@
    🔹 9. موبايل - عرض المنتجات
 -------------------------------------------------- */
 @media (max-width: 768px) {
-  .products-slider .product-item .product-actions .button { min-width: 75% !important; }
+  .products-slider .product-item .product-actions .button
+ {
+        min-width: 75% !important;
+    }
+  /* grid = منتجين */
   .products-grid { display: grid; grid-template-columns: repeat(2,1fr); grid-gap: 20px; padding: 0; margin: 0; max-width: 100%; }
   .products-grid .product-item { max-width: 44vw; }
+  
+  /* slider = منتج واحد */
   .products-slider .slick-track { display: flex !important; }
+
+  /* تحسينات عامة */
   .products-grid .product-actions, .products-slider .product-actions { display: flex; justify-content: center; }
   .products-grid .product-item .product-actions .button,
   .products-slider .product-item .product-actions .button { min-width: 100%; }
+
   .slide .mobile-image { border-radius: 26px; padding:1px 7px 5px 7px; }
   .products-grid .product-details, .products-slider .product-details { padding: 9px 15px !important; }
   .products-grid .product-details .product-price, .products-slider .product-details .product-price { margin-bottom: -6px; }
+}
+/* -------------------------------------------------
+ product slider -كود تغيير شكل أزرار السلايدر
+-------------------------------------------------- */
+
+/* -------------------------------------------------
+   🔹 10. خصم المنتج
+-------------------------------------------------- */
+.products-grid .product-item .discount_pp,
+.products-slider .product-item .discount_pp {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 8px;
+  font-size: 14px;
+  border-radius: 4px;
+  font-weight: bold;
+  z-index: 1;
+  animation: pulse 1.5s infinite;
+}
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* -------------------------------------------------
+   🔹 11. عنوان قسم المنتجات
+-------------------------------------------------- */
+.products-list-section .app-heading {
+  width: 100%;
+  padding: 7px;
+  font-size: 11px;
+  border-radius: 5px;
+  margin-bottom: 30px;
 }
 
 /* -------------------------------------------------
@@ -165,102 +217,154 @@
 .cat-arrow.left { left: -15px; }
 .cat-arrow.right { right: -15px; }
 
-/* -------------------------------------------------
-   🔹 شبكة 4 أعمدة على الحاسوب
--------------------------------------------------- */
+
+
+
+  /* شبكة 4 أعمدة على الحاسوب */
 ul.is-grid.grid-3 {
   display: grid !important;
   grid-template-columns: repeat(4, 1fr) !important;
-  gap: 20px !important;
+  gap: 20px !important; /* المسافة بين الصناديق */
   padding: 0;
   margin: 0;
 }
+
+/* تصميم كل content-box */
 ul.is-grid.grid-3 li.content-box {
   padding: 15px;
-  border-radius: 10px;
+  border-radius: 10px; /* زوايا دائرية */
   text-align: center;
 }
+
+/* شبكة 2 أعمدة على الهاتف */
 @media (max-width: 768px) {
-  ul.is-grid.grid-3 { grid-template-columns: repeat(2, 1fr) !important; }
+  ul.is-grid.grid-3 {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
 }
 
-/* -------------------------------------------------
-   🔹 الفوتر
--------------------------------------------------- */
 .footer {
   border-radius:20px;
   margin:10px;
 }
-.footer .footer-body { }
+
 .footer .footer-item h3 {
-  padding: 0 0 0px !important;
-  display: inline-block;
+    padding: 0 0 0px !important;
+     display: inline-block; /* لكي لا يمتد الخط على كامل العرض */
 }
-.footer .footer-item ul { margin-top: 15px; }
 
-/* -------------------------------------------------
-   🔹 صفحة المنتج
--------------------------------------------------- */
-@media (max-width: 768px) {
+.footer .footer-item ul {
+    margin-top: 15px; /* مسافة بين الخط والقائمة */
+}
+
+  @media (max-width: 768px) {
+
   .single-product .single-title {
-    font-size: clamp(12px, 6vw, 34px);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: block;
-    width: 100%;
-    text-align: center;
-  }
+  font-size: clamp(12px, 6vw, 34px); /* حجم خط بين 16px و 24px حسب عرض الشاشة */
+  white-space: nowrap;                /* منع الالتفاف */
+  overflow: hidden;                   /* إخفاء النص الزائد */
+  text-overflow: ellipsis;            /* إظهار نقاط ... لو النص طويل */
+  display: block;
+  width: 100%;
+  text-align: center;
 }
-.single-product .single-title{
-  border-radius: 8px;
-  padding: 10px 15px;
 }
-.single-product .preview { border-radius: 20px 20px 20px 20px !important; }
-.thumbnail-preview img { border-radius: 10px 10px 10px 10px !important; }
-.single-product .thumbnails .thumbnail-item { border:none !important; }
 
-/* -------------------------------------------------
-   🔹 صفحة الدفع
--------------------------------------------------- */
-.checkout-form {
-  margin-top:10px;
-  border-radius: 10px;
-  padding: 20px;
+   .single-product .single-title{
+      border-radius: 8px;
+      padding: 10px 15px;
+   }
+
+.single-product .preview {
+    
+    border-radius: 20px 20px 20px 20px !important;
 }
-.checkout-form { border-radius: 12px; padding: 20px; text-align: center; }
+.thumbnail-preview img {
+    border: 2px solid #0b3068!important;
+    border-radius: 10px 10px 10px 10px !important;
+}
+.single-product .thumbnails .thumbnail-item {
+  border:none !important;
+}
+.checkout-form .chekout-heading {
+  
+}
+  .checkout-form {
+  margin-top:10px;
+  border-radius: 10px; /* زوايا مستديرة */
+  padding: 20px; /* مسافة داخلية حتى ما يلتصق المحتوى بالحد */
+  
+}
+.checkout-form {
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center; /* يوسّط النصوص داخله */
+}
+
 .checkout-heading {
   display: inline-block;
-  margin: 0 auto 20px;
+  margin: 0 auto 20px; /* مسافة أسفل العنوان */
   padding: 5px 15px;
   font-size: 20px;
   font-weight: bold;
   border-radius: 8px;
 }
-.checkout-section .checkout input[type=text]{ border-radius:20px !important; }
+.checkout-section .checkout input[type=text]{
+  border-radius:20px !important;
+}
 
-/* -------------------------------------------------
-   🔹 الحاسوب
+
+  /* -------------------------------------------------
+   🔹 تعديل حجم صورة التصنيف على الحاسوب
 -------------------------------------------------- */
 @media (min-width: 1025px) {
+  /* حجم الصورة */   
    .main-bar { border-radius: 60px; margin:2px 0px; }
    .categories-style-1 .category-thumbnail img {
-    width: 210px; height: 210px;
+    width: 210px;   /* يمكن تعديل هذا الرقم */
+    height: 210px;  /* يمكن تعديل هذا الرقم */
   }
-  .categories-style-1 .category-item .category-details { width: 75% ; }
-  .categories-list-section .app-heading {
-    width: 100%; max-width: 400px ; margin: 0 auto ; padding: 10px 15px;
-    font-size: 14px ; font-weight: bold ; margin-bottom: 30px ;
-    text-align: center ; border-radius: 1000px 50px 1000px 50px ;
-  }
-  .products-list-section { text-align: center !important; }
-  .products-list-section .app-heading {
-    display: inline-block !important; margin-bottom:57px; padding: 10px 15px;
-    font-size: 14px ; font-weight: bold ; text-align: center ;
-    border-radius: 1000px 50px 1000px 50px ; width: 40%;
-  }
-  .single-product .product-details .product-section { text-align: center; }
+.categories-style-1 .category-item .category-details
+ {
+    width: 75% ;
+    
+}
+.categories-list-section .app-heading {
+    width: 100%;
+    max-width: 400px ;
+    margin: 0 auto ;
+    padding: 10px 15px;
+    font-size: 14px ;
+    font-weight: bold ;
+    margin-bottom: 30px ;
+    text-align: center ;
+    border-radius: 1000px 50px 1000px 50px ;
+}
+
+.cat-arrow {
+  top:45%;
+}
+.products-list-section {
+  text-align: center !important; /* يوسّط كل العناصر داخله */
+}
+
+.products-list-section .app-heading {
+  display: inline-block !important;
+  margin-bottom:57px;
+    padding: 10px 15px;
+    font-size: 14px ;
+    font-weight: bold ;
+    text-align: center ;
+    border-radius: 1000px 50px 1000px 50px ;
+   width: 40%;/* ليأخذ حجمه الطبيعي ويسمح بالتوسيط */
+}
+.single-product .product-details .product-section {
+   text-align: center;
+}
   .single-product .product-details .product-section .single-title {
-    display: block; text-align: center;
+   display: block;
+  text-align: center;
+  
   }
+
 }
