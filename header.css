@@ -1,0 +1,86 @@
+.notice-bar.mobile-notice-bar {
+    margin-bottom: 1px !important;
+    font-family: 'Almarai', sans-serif !important;
+    font-weight: 900 !important;
+    text-align: center;
+  }
+  
+  .notice-bar.mobile-notice-bar .fr-view p {
+    margin: 0;
+    font-family: 'Almarai', sans-serif !important;
+  
+    /* حركة الزوم */
+    animation: zoomText 3s infinite ease-in-out;
+    display: inline-block;
+  }
+  
+  .notice-bar.desktop-notice-bar {
+    margin-bottom: 1px !important;
+    font-family: 'Almarai', sans-serif !important;
+    font-weight: 900 !important;
+    text-align: center;
+  }
+  
+  .notice-bar.desktop-notice-bar .fr-view p {
+    margin: 0;
+    font-family: 'Almarai', sans-serif !important;
+  
+    /* حركة الزوم */
+    animation: zoomText 3s infinite ease-in-out;
+    display: inline-block;
+  }
+  
+  @keyframes zoomText {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.2); }
+    100% { transform: scale(1); }
+  }
+
+    .menu-sidebar * {
+      color: #000 !important; /* يجعل النص أسود */
+    }
+  
+    .menu-sidebar {
+      background-color: #ffffff !important; /* يجعل الخلفية بيضاء */
+      z-index: 9999 !important; /* يظهرها فوق كل شيء */
+    }
+
+    /* استهداف صورة السلايدر الخاصة بالهاتف */
+  img.mobile-image {
+    max-height: none !important;
+    height: auto !important; /* أو أي ارتفاع تريده */
+    width: auto !important;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  /* إزالة قيود الحاويات الأب */
+  .slider-container, 
+  .mobile-slider-wrapper, 
+  .some-parent-class {
+    max-height: none !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+  
+  
+    .product-actions a.button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;                        /* مسافة بين الأيقونة والنص */
+      font-weight: 500;               /* خط أوضح قليلاً */
+      transition: all 0.3s ease-in-out;
+       font-size: 16px;
+      border-radius: 4px 14px 4px 14px !important;
+      padding: 6px 0px;
+      background-repeat: no-repeat;
+      background-position: right center;
+      background-size: 20px;
+  
+     }
+  
+    .product-actions a.button:hover {
+      transform: translateY(-1px);    /* تحريك خفيف عند المرور */
+    }
