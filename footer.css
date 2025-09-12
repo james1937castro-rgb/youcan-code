@@ -44,7 +44,7 @@
 .category-slider.fallback {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 20px;
+  gap: 12px;
 }
 
 /* -------------------------------------------------
@@ -286,10 +286,7 @@ ul.is-grid.grid-3 li.content-box {
 .single-product .thumbnails .thumbnail-item {
   border:none !important;
 }
-.checkout-form .chekout-heading {
-  
-}
-  .checkout-form {
+ .checkout-form {
   margin-top:10px;
   border-radius: 10px; /* زوايا مستديرة */
   padding: 20px; /* مسافة داخلية حتى ما يلتصق المحتوى بالحد */
