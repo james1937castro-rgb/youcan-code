@@ -74,4 +74,112 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+(function(){
+  const TITLE = "تنبيه";
+  const MESSAGE = "لا يمكن عرض الصفحة ";
+  const BUTTON_TEXT = "موافق";
+
+  let modalVisible = false;
+  let browsingAllowed = true; // افتراض: عند الدخول مسموح بالتصفح
+  let lastTriggerAt = 0;
+  const MIN_RETRIGGER_INTERVAL = 600; // منع تريجرات سريعة جداً
+
+  function createModal(){
+    if (document.getElementById('__antiInspect_backdrop')) return;
+    document.documentElement.classList.add('__ai_no_select');
+
+    const bd = document.createElement('div'); bd.id = '__antiInspect_backdrop';
+    const md = document.createElement('div'); md.id = '__antiInspect_modal';
+    md.innerHTML = `
+      <h2>${TITLE}</h2>
+      <p>${MESSAGE}</p>
+      <div style="text-align:left;">
+        <button id="__ai_ok">${BUTTON_TEXT}</button>
+      </div>
+    `;
+    bd.appendChild(md);
+    document.body.appendChild(bd);
+
+    document.getElementById('__ai_ok').addEventListener('click', function(){
+      const b = document.getElementById('__antiInspect_backdrop');
+      if (b) b.remove();
+      document.documentElement.classList.remove('__ai_no_select');
+      modalVisible = false;
+      browsingAllowed = true; // بعد موافق يسمح بتصفح عادي
+    });
+
+    modalVisible = true;
+    browsingAllowed = false;
+  }
+
+  function trigger(reason){
+    const now = Date.now();
+    if (now - lastTriggerAt < MIN_RETRIGGER_INTERVAL) return;
+    lastTriggerAt = now;
+
+    if (modalVisible) return;
+    try { createModal(); } catch(e){}
+    console.warn('anti-inspect triggered:', reason || 'unknown');
+  }
+
+  // 1) فقط event contextmenu (زر أيمن) يظهر المودال
+  window.addEventListener('contextmenu', function(e){
+    e.preventDefault();
+    trigger('contextmenu');
+    return false;
+  }, true);
+
+  // 2) جميع الاختصارات الشائعة لفتح DevTools أو عرض المصدر
+  window.addEventListener('keydown', function(e){
+    // دعم Ctrl (Windows/Linux) و Meta (Mac)
+    const ctrl = e.ctrlKey || e.metaKey;
+    const shift = e.shiftKey;
+
+    // F12
+    if (e.key === 'F12') { e.preventDefault(); trigger('F12'); return false; }
+
+    // Ctrl/Cmd + Shift + I / J / K (Chrome/Firefox devtools)
+    if (ctrl && shift && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'K' || e.key === 'k')) {
+      e.preventDefault(); trigger('CtrlShift_IJK'); return false;
+    }
+
+    // Ctrl/Cmd + U (view source)
+    if (ctrl && (e.key === 'U' || e.key === 'u')) { e.preventDefault(); trigger('CtrlU'); return false; }
+
+    // Ctrl/Cmd + Shift + C (inspect element)
+    if (ctrl && shift && (e.key === 'C' || e.key === 'c')) { e.preventDefault(); trigger('CtrlShiftC'); return false; }
+
+    // بعض متصفحات: Ctrl+Shift+K (firefox console)
+    if (ctrl && shift && (e.key === 'K' || e.key === 'k')) { e.preventDefault(); trigger('CtrlShiftK'); return false; }
+  }, true);
+
+  // 3) منع اختيارات النسخ والسحب (اختياري لكن مفيد)
+  try {
+    window.addEventListener('copy', function(e){ e.preventDefault(); }, true);
+    document.addEventListener('selectstart', function(e){ e.preventDefault(); }, true);
+    document.addEventListener('dragstart', function(e){ e.preventDefault(); }, true);
+  } catch(e){}
+
+  // 4) كشف فتح DevTools عبر console.toString trick (يلتقط فتح DevTools من القوائم أيضاً)
+  (function(){
+    const obj = { toString: function(){ trigger('console_open'); return ''; } };
+    setInterval(function(){ try{ console.log('%c', obj); }catch(e){} }, 2000);
+  })();
+
+  // 5) كشف التوقف/البريكبوينت (breakpoint pause) كمكمّل
+  (function(){
+    let last = performance.now();
+    setInterval(function(){
+      const now = performance.now();
+      if (now - last > 300) { trigger('perf_pause'); }
+      last = now;
+    }, 100);
+  })();
+
+  // ملاحظة مهمة: الكود يمنع و/أو يعترض اختصارات محاولة فتح DevTools ويعرض المودال.
+  // لكنه لا يمكنه منع مطوّر محترف من الوصول إلى الكود تمامًا (كما ذكرت سابقًا).
+  // هذه الوسائل تضيف طبقة إزعاج/حماية للمستخدم العادي فقط.
+})();
+
+
 
